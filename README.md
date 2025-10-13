@@ -1,125 +1,38 @@
-import React, { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zep Swipe — Africa's Checkout Button</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-[#001f3f] via-[#003366] to-[#0077cc] text-white min-h-screen flex flex-col items-center justify-center font-sans">
+  
+  <!-- Logo -->
+  <div class="flex flex-col items-center space-y-4 text-center">
+    <img src="https://your-logo-link-here.png" alt="Zep Swipe Logo" class="w-20 h-20 rounded-full shadow-lg">
+    
+    <!-- Headline -->
+    <h1 class="text-4xl md:text-5xl font-bold">Zep Swipe</h1>
+    <p class="text-lg md:text-xl text-gray-200">Africa's Checkout Button & Borderless Wallet</p>
+  </div>
 
-// Mock quiz questions
-const quizData = [
-  {
-    id: 1,
-    question: "What is Zep Swipe?",
-    options: [
-      "A streaming platform",
-      "A student & vendor wallet ecosystem",
-      "A mobile game",
-      "A crypto exchange",
-    ],
-    answer: 1,
-  },
-  {
-    id: 2,
-    question: "Which tokens can be used for payments in Zep Swipe?",
-    options: ["BTC", "ETH", "USDT and $ZAC", "DOGE"],
-    answer: 2,
-  },
-  {
-    id: 3,
-    question: "Who can sell digital products on Zep Swipe?",
-    options: ["Vendors", "Only students", "Banks", "MTN staff"],
-    answer: 1,
-  },
-  {
-    id: 4,
-    question: "What is Zep Shop used for?",
-    options: [
-      "Buying groceries",
-      "Listing digital products and student deals",
-      "Streaming music",
-      "Sending emails",
-    ],
-    answer: 1,
-  },
-  {
-    id: 5,
-    question: "Zep Swipe is powered by which core feature?",
-    options: [
-      "Blockchain and mobile money",
-      "VPN and cloud storage",
-      "SMS integration",
-      "Social media",
-    ],
-    answer: 0,
-  },
-];
+  <!-- CTA Buttons -->
+  <div class="mt-8 flex flex-col md:flex-row gap-4">
+    <button class="px-6 py-3 bg-white text-[#001f3f] font-semibold rounded-xl shadow hover:bg-gray-100 transition">
+      Connect Wallet
+    </button>
+    <button class="px-6 py-3 bg-[#0077cc] border border-white font-semibold rounded-xl shadow hover:bg-[#0099ff] transition">
+      Continue with Mobile Number
+    </button>
+  </div>
 
-const Gamify = () => {
-  const [current, setCurrent] = useState(0);
-  const [score, setScore] = useState(0);
-  const [completed, setCompleted] = useState(false);
+  <!-- Tagline -->
+  <p class="mt-6 text-sm text-gray-300">Secure by blockchain. Powered by Zep.</p>
 
-  const handleAnswer = (index) => {
-    const question = quizData[current];
-    if (index === question.answer) {
-      setScore(score + 10); // +10 $ZAC reward per correct answer
-    }
+  <!-- Footer -->
+  <footer class="absolute bottom-4 text-xs text-gray-400 text-center">
+    🎓 Built for students. Ready for the future.
+  </footer>
 
-    if (current + 1 < quizData.length) {
-      setCurrent(current + 1);
-    } else {
-      setCompleted(true);
-    }
-  };
-
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-indigo-300 p-4">
-      <Card className="max-w-md w-full rounded-2xl shadow-xl p-6 bg-white">
-        <CardContent>
-          {!completed ? (
-            <>
-              <h2 className="text-xl font-bold mb-4 text-indigo-700">
-                Learn & Earn 💰
-              </h2>
-              <p className="text-gray-800 font-semibold mb-2">
-                {quizData[current].question}
-              </p>
-              <div className="space-y-3">
-                {quizData[current].options.map((opt, i) => (
-                  <Button
-                    key={i}
-                    variant="outline"
-                    className="w-full"
-                    onClick={() => handleAnswer(i)}
-                  >
-                    {opt}
-                  </Button>
-                ))}
-              </div>
-              <p className="mt-4 text-sm text-gray-600">
-                Question {current + 1} of {quizData.length}
-              </p>
-            </>
-          ) : (
-            <div className="text-center">
-              <h2 className="text-2xl font-bold text-green-600 mb-2">
-                🎉 Completed!
-              </h2>
-              <p className="text-gray-700 mb-4">
-                You earned <span className="font-semibold">{score} $ZAC</span>
-              </p>
-              <Button
-                onClick={() => {
-                  setCurrent(0);
-                  setScore(0);
-                  setCompleted(false);
-                }}
-              >
-                Retry Quiz
-              </Button>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
-  );
-};
-
-export default Gamify;
+</body>
+</html>
