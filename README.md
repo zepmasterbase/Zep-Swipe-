@@ -27,7 +27,7 @@
   </div>
 
   <!-- Tagline -->
-  <p class="mt-6 text-sm text-gray-300">Secure by blockchain. Powered by Zep.</p>
+  <p class="mt-6 text-sm text-gray-300">Secure by blockchain. Powered by $ZAC.</p>
 
   <!-- Footer -->
   <footer class="absolute bottom-4 text-xs text-gray-400 text-center">
