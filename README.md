@@ -13,19 +13,19 @@ const quizData = [
       "A mobile game",
       "A crypto exchange",
     ],
-    answer: 2,
+    answer: 1,
   },
   {
     id: 2,
     question: "Which tokens can be used for payments in Zep Swipe?",
-    options: ["BTC", "ETH", "BNB and $ZAC", "DOGE"],
-    answer: 4,
+    options: ["BTC", "ETH", "USDT and $ZAC", "DOGE"],
+    answer: 2,
   },
   {
     id: 3,
     question: "Who can sell digital products on Zep Swipe?",
     options: ["Vendors", "Only students", "Banks", "MTN staff"],
-    answer: 2,
+    answer: 1,
   },
   {
     id: 4,
@@ -47,7 +47,7 @@ const quizData = [
       "SMS integration",
       "Social media",
     ],
-    answer: 1,
+    answer: 0,
   },
 ];
 
