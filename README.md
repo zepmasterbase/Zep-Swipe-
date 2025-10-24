@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -12,16 +11,9 @@
 :root{
   --bg-a:#0f1630; --bg-b:#201a3a; --accent-1:#00f0ff; --accent-2:#ff00d4; --accent-3:#ff69b4;
 }
-body{
-  margin:0; font-family:'Inter',system-ui,Arial;
-  background:linear-gradient(135deg,var(--bg-a) 0%,#15102b 50%,var(--bg-b) 100%);
-  color:#eaf2ff; overflow-x:hidden;
-}
+body{margin:0;font-family:'Inter',system-ui,Arial;background:linear-gradient(135deg,var(--bg-a) 0%,#15102b 50%,var(--bg-b) 100%);color:#eaf2ff;overflow-x:hidden;}
 h1,h2,h3{font-family:'Orbitron',sans-serif;}
-.neon-text{
-  background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-}
+.neon-text{background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 .glass{background:rgba(255,255,255,0.04);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.05);border-radius:12px;}
 .cta-main{background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));color:#000;}
 .cta-main:hover{transform:translateY(-3px);}
@@ -53,24 +45,30 @@ h1,h2,h3{font-family:'Orbitron',sans-serif;}
     <button id="connectHeader" class="px-4 py-2 rounded-lg cta-main font-semibold">Connect Wallet</button>
   </nav>
 </header>
+
 <div class="h-20"></div>
 
+<!-- HERO -->
 <section id="top" class="max-w-6xl mx-auto px-4 py-8">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
     <div class="space-y-4">
       <h1 class="text-4xl md:text-5xl font-bold neon-text">Zep Swipe — Web3 Campus Wallet</h1>
-      <p class="text-gray-300 max-w-xl">Earn <span class="neon-text">$ZAC</span> by taking quick quizzes. Redeem, spend, or stake it — all built for African students.</p>
+      <p class="text-gray-300 max-w-xl">Earn <span class="neon-text">$ZAC</span> by taking quick quizzes. Redeem, spend, or stake it — all powered by blockchain and built for African students.</p>
+
       <div class="flex flex-col sm:flex-row flex-wrap gap-3 mt-4">
         <button id="connectHero" class="px-5 py-3 rounded-lg cta-main font-semibold float-card">Connect Wallet</button>
         <button id="connectMobileBtn" class="px-5 py-3 rounded-lg border border-white/20 glass float-card">Connect with Mobile Number</button>
         <a href="https://forms.gle/7Pr7gLySfroWMptC9" target="_blank" class="px-5 py-3 rounded-lg border border-white/8 glass float-card">Start Quiz</a>
         <a href="#wishlist" class="px-4 py-3 rounded-lg bg-yellow-400 text-black font-semibold float-card">Join Early — Get free ZAC</a>
       </div>
+
       <div class="mt-4 token-pill inline-flex gap-2">
         <span class="text-xs text-gray-300">Powered by</span>
         <strong>$ZAC</strong><span class="text-xs text-gray-300">+ USDT</span>
       </div>
     </div>
+
+    <!-- Web3 abstract SVG -->
     <div class="rounded-xl overflow-hidden shadow-lg flex items-center justify-center bg-gradient-to-br from-[#221b3a] to-[#181033] h-80 md:h-96 relative">
       <svg viewBox="0 0 400 400" class="w-4/5 h-4/5">
         <defs>
@@ -129,7 +127,7 @@ h1,h2,h3{font-family:'Orbitron',sans-serif;}
 </footer>
 
 <script>
-// particles (lightweight)
+/* particles */
 const c=document.getElementById('particle-canvas'),x=c.getContext('2d');
 let p=[],W=innerWidth,H=innerHeight;
 function rs(){W=c.width=innerWidth;H=c.height=innerHeight;}
@@ -138,11 +136,19 @@ for(let i=0;i<100;i++)p.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.rando
 function loop(){x.clearRect(0,0,W,H);p.forEach(a=>{a.x+=a.vx;a.y+=a.vy;if(a.x<0)a.x=W;if(a.x>W)a.x=0;if(a.y<0)a.y=H;if(a.y>H)a.y=0;x.fillStyle='rgba(0,240,255,0.12)';x.beginPath();x.arc(a.x,a.y,2,0,6.28);x.fill();});requestAnimationFrame(loop);}
 loop();
 
-// Connect Wallet
-document.getElementById('connectHeader').onclick=()=>alert('Mock Connect Wallet.');
-document.getElementById('connectHero').onclick=()=>alert('Mock Connect Wallet.');
+/* Wallet Connect (MetaMask/Base) */
+async function connectWallet() {
+  if(window.ethereum){
+    try{
+      const accounts = await window.ethereum.request({ method:'eth_requestAccounts' });
+      alert('Connected account: ' + accounts[0]);
+    }catch(err){alert('Connection rejected');}
+  } else {alert('No Web3 wallet detected. Install MetaMask or Base.');}
+}
+document.getElementById('connectHeader').onclick=connectWallet;
+document.getElementById('connectHero').onclick=connectWallet;
 
-// Mobile modal
+/* Mobile modal */
 const modal=document.getElementById('mobileModal');
 const modalBtn=document.getElementById('connectMobileBtn');
 const modalClose=document.getElementById('modalClose');
@@ -150,5 +156,4 @@ modalBtn.onclick=()=>modal.style.display='flex';
 modalClose.onclick=()=>modal.style.display='none';
 window.onclick=(e)=>{if(e.target===modal)modal.style.display='none';}
 </script>
-</body>
-</html>
+</body
