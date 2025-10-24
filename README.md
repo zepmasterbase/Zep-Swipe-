@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -22,6 +22,7 @@
     color: #fff;
     scroll-behavior: smooth;
     overflow-x: hidden;
+    position: relative;
   }
 
   h1,h2,h3 { font-family: 'Orbitron', sans-serif; }
@@ -60,6 +61,38 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Floating $ZAC with soft glow trail */
+  .floating-zac {
+    position: absolute;
+    font-weight: bold;
+    color: #00ffff;
+    text-shadow: 0 0 8px #00ffff, 0 0 16px #ff00d4, 0 0 24px #ff69b4;
+    animation: floatZAC linear infinite;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  @keyframes floatZAC {
+    0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+    50% { transform: translateY(-50px) rotate(10deg); opacity: 0.6; }
+    100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+  }
+
+  /* Particle orbs behind sections */
+  .particle-orb {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.25;
+    pointer-events: none;
+    animation: floatOrb linear infinite;
+  }
+
+  @keyframes floatOrb {
+    0% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-50px) translateX(30px); }
+    100% { transform: translateY(0) translateX(0); }
+  }
 </style>
 </head>
 <body id="top">
@@ -78,8 +111,13 @@
 </nav>
 
 <!-- Hero Section -->
-<section class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-32">
-  <div class="fade-up">
+<section class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-32 relative overflow-hidden">
+  <!-- Neon Particle Orbs -->
+  <div class="particle-orb bg-cyan-400 w-12 h-12" style="top:10%; left:20%; animation-duration:12s;"></div>
+  <div class="particle-orb bg-pink-500 w-8 h-8" style="top:60%; left:70%; animation-duration:8s;"></div>
+  <div class="particle-orb bg-purple-500 w-10 h-10" style="top:40%; left:50%; animation-duration:10s;"></div>
+
+  <div class="fade-up relative z-10">
     <h1 class="text-5xl md:text-6xl font-bold neon-text mb-6">Zep Swipe</h1>
     <p class="max-w-xl mx-auto text-gray-300 mb-8 text-lg">Africa’s futuristic checkout & borderless digital wallet — where payments meet innovation.</p>
     <div class="flex flex-col md:flex-row gap-4 justify-center">
@@ -91,14 +129,20 @@
 </section>
 
 <!-- Learn & Earn Section -->
-<section id="learn-earn" class="fade-up py-20 px-6 text-center max-w-4xl mx-auto">
+<section id="learn-earn" class="fade-up py-20 px-6 text-center max-w-4xl mx-auto relative overflow-hidden">
+  <div class="particle-orb bg-cyan-400 w-10 h-10" style="top:20%; left:15%; animation-duration:14s;"></div>
+  <div class="particle-orb bg-purple-500 w-12 h-12" style="top:70%; left:80%; animation-duration:9s;"></div>
+
   <h2 class="text-4xl font-bold neon-text mb-4">Learn & Earn</h2>
   <p class="text-gray-300 mb-6">Learn blockchain payments, earn crypto rewards, and grow your Web3 knowledge.</p>
   <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBjWItPmUzfEDcz4FrOS8-9vnuLC31q6cfxQKihW-FmhCO_Q/viewform?usp=send_form" target="_blank" class="px-8 py-3 gradient-btn text-black font-semibold rounded-lg">Start Learning</a>
 </section>
 
 <!-- Wishlist Section -->
-<section id="wishlist" class="fade-up py-20 px-6 max-w-2xl mx-auto text-center glass">
+<section id="wishlist" class="fade-up py-20 px-6 max-w-2xl mx-auto text-center glass relative overflow-hidden">
+  <div class="particle-orb bg-pink-500 w-10 h-10" style="top:30%; left:25%; animation-duration:13s;"></div>
+  <div class="particle-orb bg-cyan-400 w-8 h-8" style="top:60%; left:70%; animation-duration:11s;"></div>
+
   <h2 class="text-3xl font-bold neon-text mb-4">Join Wishlist</h2>
   <p class="text-gray-300 mb-6">Sign up for early access and be part of Africa’s digital payment revolution.</p>
   <form action="https://docs.google.com/forms/d/e/1FAIpQLSfBjWItPmUzfEDcz4FrOS8-9vnuLC31q6cfxQKihW-FmhCO_Q/viewform?usp=send_form" target="_blank" class="flex flex-col gap-3">
@@ -121,13 +165,36 @@
   © 2025 Zep Swipe. Built for Africa’s innovators. Powered by blockchain.
 </footer>
 
-<!-- Fade-Up Animation -->
+<!-- Scripts -->
 <script>
+  // Fade-up animation
   const fadeEls = document.querySelectorAll('.fade-up');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   fadeEls.forEach(el => observer.observe(el));
+
+  // Floating $ZAC currency with soft trail effect
+  const zacCount = 12;
+  for(let i=0;i<zacCount;i++){
+    const zac = document.createElement('div');
+    zac.className = 'floating-zac';
+    zac.textContent = '$ZAC';
+    zac.style.left = Math.random() * window.innerWidth + 'px';
+    zac.style.top = Math.random() * window.innerHeight + 'px';
+    zac.style.fontSize = (14 + Math.random() * 16) + 'px';
+    zac.style.animationDuration = (5 + Math.random() * 5) + 's';
+    document.body.appendChild(zac);
+
+    // Create trail clones
+    for(let t=1; t<=3; t++){
+      const trail = zac.cloneNode(true);
+      trail.style.opacity = 0.3 / t;
+      trail.style.filter = `blur(${t*2}px)`;
+      trail.style.animationDuration = (5 + Math.random() * 5) + 's';
+      document.body.appendChild(trail);
+    }
+  }
 </script>
 
 </body>
