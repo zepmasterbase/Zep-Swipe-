@@ -181,4 +181,4 @@ h1,h2,h3{font-family:'Orbitron',sans-serif;}
   <div class="max-w-3xl mx-auto glass p-6 rounded-lg text-center">
     <h3 class="text-2xl font-bold neon-text mb-2">Join Early Access — Get Free ZAC</h3>
     <p class="text-gray-300 mb-4">Be part of the first student beta. Earn ZAC just for signing up!</p>
-    <form target="_blank" action="https://docs.google.com/forms/d/e/1FAIpQLSfBjWItPmUzfEDcz4FrOS8
+    
