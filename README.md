@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap"
     rel="stylesheet"
   />
 
@@ -22,14 +22,15 @@
     }
     body {
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(to bottom right, #0a0a0a, #001f3f, #003366);
+      background: linear-gradient(to bottom right, #000814, #001f3f, #003366);
       color: #fff;
     }
     h1, h2, h3 {
       font-family: 'Orbitron', sans-serif;
     }
     .neon-text {
-      text-shadow: 0 0 6px #00f, 0 0 12px #0ff, 0 0 24px #0ff;
+      color: #00ffff;
+      text-shadow: 0 0 5px #00ffff, 0 0 10px #00e5ff, 0 0 20px #00e5ff;
     }
     .gradient-btn {
       background: linear-gradient(90deg, #00ffff, #00b4ff, #00ff99);
@@ -50,8 +51,11 @@
 <body class="min-h-screen">
 
   <!-- Navbar -->
-  <nav class="flex justify-between items-center p-6 max-w-7xl mx-auto">
-    <h1 class="text-2xl md:text-3xl font-bold neon-text">Zep Swipe</h1>
+  <nav class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+    <!-- Left: Neon Logo Text -->
+    <h1 class="text-3xl md:text-4xl font-bold neon-text">Zep Swipe</h1>
+
+    <!-- Right: Dropdown Menu -->
     <div class="relative group">
       <button class="px-4 py-2 bg-cyan-500 text-black font-semibold rounded-lg">
         Menu ▼
@@ -96,8 +100,8 @@
     />
     <h1 class="text-5xl md:text-6xl font-bold neon-text mb-4">Zep Swipe</h1>
     <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl">
-      Africa's futuristic checkout button & borderless digital wallet. Fast,
-      secure, and ready for the future.
+      Africa's futuristic checkout button & borderless digital wallet.
+      Fast, secure, and ready for the future.
     </p>
     <div class="flex flex-col md:flex-row gap-6">
       <button
