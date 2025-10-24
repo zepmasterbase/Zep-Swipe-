@@ -1,144 +1,84 @@
-<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Zep Swipe — Campus Wallet (Web3 Student Edition)</title>
+<title>Zep Swipe — Sleek Campus Wallet</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg-a:#0f1630; 
-  --bg-b:#201a3a; 
-  --accent-1:#00f0ff; 
-  --accent-2:#ff00d4; 
+  --bg-a:#0c0c18;
+  --bg-b:#1f1b3a;
+  --accent-1:#00f0ff;
+  --accent-2:#ff00d4;
   --accent-3:#ff69b4;
 }
 body{
-  margin:0;
-  font-family:'Inter',system-ui,Arial;
-  background:linear-gradient(135deg,var(--bg-a) 0%,#15102b 50%,var(--bg-b) 100%);
-  color:#eaf2ff;
-  overflow-x:hidden;
+  margin:0; font-family:'Inter',system-ui,Arial;
+  background:linear-gradient(135deg,var(--bg-a),var(--bg-b));
+  color:#eaf2ff; overflow-x:hidden;
 }
 h1,h2,h3{font-family:'Orbitron',sans-serif;}
 .neon-text{
   background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  text-shadow:0 0 6px rgba(0,240,255,.4),0 0 12px rgba(255,0,212,.3);
 }
 .glass{
-  background:rgba(255,255,255,0.04);
-  backdrop-filter:blur(6px);
-  border:1px solid rgba(255,255,255,0.05);
-  border-radius:12px;
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;
+  transition: transform .3s, box-shadow .3s;
+}
+.glass:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 30px rgba(0,240,255,0.2),0 0 40px rgba(255,0,212,0.15);
 }
 .cta-main{
   background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));
   color:#000;
-  transition:transform 0.3s;
+  transition: transform .25s, box-shadow .25s;
 }
 .cta-main:hover{
   transform:translateY(-3px);
+  box-shadow:0 0 20px rgba(0,240,255,0.4),0 0 30px rgba(255,0,212,0.3);
 }
 .float-card{
-  transition:transform .35s,box-shadow .25s;
+  transition: transform .35s, box-shadow .25s;
 }
 .float-card:hover{
   transform:translateY(-8px);
-  box-shadow:0 18px 40px rgba(5,6,12,0.6);
+  box-shadow:0 18px 40px rgba(5,6,12,0.5);
 }
 .token-pill{
-  display:inline-flex;
-  gap:.5rem;
-  align-items:center;
-  padding:.35rem .6rem;
-  border-radius:999px;
-  font-weight:600;
-  font-size:.92rem;
+  display:inline-flex; gap:.5rem; align-items:center;
+  padding:.35rem .6rem; border-radius:999px;
+  font-weight:600; font-size:.92rem;
   background:rgba(255,255,255,0.05);
 }
-#particle-canvas{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
+#lines-canvas{
+  position:fixed; inset:0; z-index:0; pointer-events:none;
 }
-@media (max-width:768px){.header-center{display:none;}}
-
-/* Modal */
-.modal-bg{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.7);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:1000;
-}
-.modal-content{
-  background:#11142a;
-  padding:2rem;
-  border-radius:12px;
-  max-width:400px;
-  width:90%;
-  position:relative;
-}
-.modal-content input{
-  width:100%;
-  padding:.75rem;
-  border-radius:8px;
-  margin-bottom:1rem;
-  border:none;
-  outline:none;
-}
-.modal-close{
-  position:absolute;
-  top:10px;
-  right:12px;
-  font-size:20px;
-  cursor:pointer;
-  color:#ff69b4;
-}
-
-/* Roadmap */
-.roadmap-step{
-  position: relative;
-}
-.roadmap-step::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:14px;
-  width:2px;
-  height:100%;
-  background:rgba(255,255,255,0.1);
-  z-index:-1;
-}
-.roadmap-dot{
-  width:16px;
-  height:16px;
-  border-radius:50%;
-  background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));
-  position:absolute;
-  left:7px;
-  top:0;
-}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:1000;}
+.modal-content{background:#11142a;padding:2rem;border-radius:12px;max-width:400px;width:90%;position:relative;}
+.modal-content input{width:100%;padding:.75rem;border-radius:8px;margin-bottom:1rem;border:none;outline:none;}
+.modal-close{position:absolute;top:10px;right:12px;font-size:20px;cursor:pointer;color:#ff69b4;}
 </style>
 </head>
 <body>
 
-<canvas id="particle-canvas"></canvas>
+<canvas id="lines-canvas"></canvas>
 
 <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl flex items-center justify-between px-4 py-2 glass z-50">
   <div class="flex items-center gap-4">
     <a href="#top" class="text-xl font-bold neon-text">Zep Swipe</a>
     <span class="hidden sm:inline text-sm text-gray-300">Campus Wallet • Web3 Rewards</span>
   </div>
-  <div class="header-center token-pill hidden md:inline-flex">
-    <strong class="text-white">$ZAC</strong><span class="text-xs text-gray-300">+ USDT</span>
+  <div class="token-pill hidden md:inline-flex">
+    <strong>$ZAC</strong><span class="text-xs text-gray-300">+ USDT</span>
   </div>
   <nav class="flex items-center gap-3">
     <button id="connectHeader" class="px-4 py-2 rounded-lg cta-main font-semibold">Connect Wallet</button>
@@ -148,33 +88,26 @@ h1,h2,h3{font-family:'Orbitron',sans-serif;}
 <div class="h-20"></div>
 
 <!-- HERO -->
-<section id="top" class="max-w-6xl mx-auto px-4 py-8">
+<section id="top" class="max-w-6xl mx-auto px-4 py-12">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
     <div class="space-y-4">
-      <h1 class="text-4xl md:text-5xl font-bold neon-text">Zep Swipe — Web3 Campus Wallet</h1>
-      <p class="text-gray-300 max-w-xl">Earn <span class="neon-text">$ZAC</span> by taking quick quizzes. Redeem, spend, or stake it — all powered by blockchain and built for African students.</p>
-
+      <h1 class="text-4xl md:text-5xl font-bold neon-text">Zep Swipe — Sleek Campus Wallet</h1>
+      <p class="text-gray-300 max-w-xl">Earn <span class="neon-text">$ZAC</span> by taking quizzes, store rewards, and spend at partner vendors — built for African students.</p>
       <div class="flex flex-col sm:flex-row flex-wrap gap-3 mt-4">
         <button id="connectHero" class="px-5 py-3 rounded-lg cta-main font-semibold float-card">Connect Wallet</button>
         <button id="connectMobileBtn" class="px-5 py-3 rounded-lg border border-white/20 glass float-card">Connect with Mobile Number</button>
         <a href="https://forms.gle/7Pr7gLySfroWMptC9" target="_blank" class="px-5 py-3 rounded-lg border border-white/8 glass float-card">Start Quiz</a>
         <a href="#wishlist" class="px-4 py-3 rounded-lg bg-yellow-400 text-black font-semibold float-card">Join Early — Get free ZAC</a>
       </div>
-
       <div class="mt-4 token-pill inline-flex gap-2">
         <span class="text-xs text-gray-300">Powered by</span>
         <strong>$ZAC</strong><span class="text-xs text-gray-300">+ USDT</span>
       </div>
     </div>
-
-    <div class="rounded-xl overflow-hidden shadow-lg flex items-center justify-center bg-gradient-to-br from-[#221b3a] to-[#181033] h-80 md:h-96 relative">
+    <!-- Hero SVG -->
+    <div class="rounded-xl overflow-hidden shadow-lg flex items-center justify-center bg-gradient-to-br from-[#1a1033] to-[#0f0c29] h-80 md:h-96 relative glass">
       <svg viewBox="0 0 400 400" class="w-4/5 h-4/5">
-        <defs>
-          <linearGradient id="grad" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stop-color="#00f0ff"/>
-            <stop offset="100%" stop-color="#ff00d4"/>
-          </linearGradient>
-        </defs>
+        <defs><linearGradient id="grad" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#00f0ff"/><stop offset="100%" stop-color="#ff00d4"/></linearGradient></defs>
         <circle cx="200" cy="200" r="160" stroke="url(#grad)" stroke-width="2" fill="none" opacity="0.3"/>
         <circle cx="200" cy="200" r="120" stroke="url(#grad)" stroke-width="1.5" fill="none" opacity="0.2"/>
         <path d="M80 200 L200 80 L320 200 L200 320 Z" fill="none" stroke="url(#grad)" stroke-width="3"/>
@@ -185,7 +118,7 @@ h1,h2,h3{font-family:'Orbitron',sans-serif;}
   </div>
 </section>
 
-<!-- Modal -->
+<!-- Mobile Modal -->
 <div id="mobileModal" class="modal-bg">
   <div class="modal-content">
     <span id="modalClose" class="modal-close">&times;</span>
@@ -200,48 +133,10 @@ h1,h2,h3{font-family:'Orbitron',sans-serif;}
   <h2 class="text-3xl font-bold neon-text mb-4">How Students Earn</h2>
   <p class="text-gray-300 mb-6">Quiz → Reward → Wallet → Vendor</p>
   <div class="grid sm:grid-cols-4 gap-4 max-w-5xl mx-auto">
-    <div class="glass p-4 rounded-lg float-card flex flex-col items-center">
-      <img src="https://img.icons8.com/ios-filled/50/00f0ff/quiz.png" class="mb-2 w-12 h-12"/>
-      <div class="font-semibold text-xl mb-2">1. Quiz</div>
-      <p class="text-gray-300 text-sm">Take short interactive quizzes.</p>
-    </div>
-    <div class="glass p-4 rounded-lg float-card flex flex-col items-center">
-      <img src="https://img.icons8.com/ios-filled/50/ff00d4/reward.png" class="mb-2 w-12 h-12"/>
-      <div class="font-semibold text-xl mb-2">2. Reward</div>
-      <p class="text-gray-300 text-sm">Earn $ZAC instantly.</p>
-    </div>
-    <div class="glass p-4 rounded-lg float-card flex flex-col items-center">
-      <img src="https://img.icons8.com/ios-filled/50/ff69b4/wallet.png" class="mb-2 w-12 h-12"/>
-      <div class="font-semibold text-xl mb-2">3. Wallet</div>
-      <p class="text-gray-300 text-sm">Store rewards securely.</p>
-    </div>
-    <div class="glass p-4 rounded-lg float-card flex flex-col items-center">
-      <img src="https://img.icons8.com/ios-filled/50/00f0ff/shop.png" class="mb-2 w-12 h-12"/>
-      <div class="font-semibold text-xl mb-2">4. Vendor</div>
-      <p class="text-gray-300 text-sm">Spend or swap at partners.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ROADMAP -->
-<section id="roadmap" class="py-12 px-4 text-center max-w-4xl mx-auto">
-  <h2 class="text-3xl font-bold neon-text mb-6">Roadmap</h2>
-  <div class="relative ml-6">
-    <div class="roadmap-step mb-8 pl-8">
-      <div class="roadmap-dot"></div>
-      <h3 class="font-semibold text-lg neon-text">Phase 1 — Beta Launch</h3>
-      <p class="text-gray-300 text-sm">Initial rollout to select students with quizzes and wallet integration.</p>
-    </div>
-    <div class="roadmap-step mb-8 pl-8">
-      <div class="roadmap-dot"></div>
-      <h3 class="font-semibold text-lg neon-text">Phase 2 — Vendor Partnerships</h3>
-      <p class="text-gray-300 text-sm">Collaborate with campus vendors for redeeming $ZAC.</p>
-    </div>
-    <div class="roadmap-step mb-8 pl-8">
-      <div class="roadmap-dot"></div>
-      <h3 class="font-semibold text-lg neon-text">Phase 3 — Full Launch</h3>
-      <p class="text-gray-300 text-sm">Open platform to all students across Africa with staking and rewards features.</p>
-    </div>
+    <div class="glass p-4 rounded-lg float-card"><div class="font-semibold text-xl mb-2">1. Quiz</div><p class="text-gray-300 text-sm">Take interactive quizzes.</p></div>
+    <div class="glass p-4 rounded-lg float-card"><div class="font-semibold text-xl mb-2">2. Reward</div><p class="text-gray-300 text-sm">Earn $ZAC instantly.</p></div>
+    <div class="glass p-4 rounded-lg float-card"><div class="font-semibold text-xl mb-2">3. Wallet</div><p class="text-gray-300 text-sm">Store rewards securely.</p></div>
+    <div class="glass p-4 rounded-lg float-card"><div class="font-semibold text-xl mb-2">4. Vendor</div><p class="text-gray-300 text-sm">Spend or swap at partners.</p></div>
   </div>
 </section>
 
@@ -259,38 +154,50 @@ h1,h2,h3{font-family:'Orbitron',sans-serif;}
 </section>
 
 <footer class="py-8 text-center text-gray-300 text-sm border-t border-white/6">
-  © 2025 Zep Swipe — Web3 Campus Wallet • Powered by $ZAC + USDT
+  © 2025 Zep Swipe — Sleek Campus Wallet • Powered by $ZAC + USDT
 </footer>
 
 <script>
-/* particles */
-const c=document.getElementById('particle-canvas'),x=c.getContext('2d');
-let p=[],W=innerWidth,H=innerHeight;
-function rs(){W=c.width=innerWidth;H=c.height=innerHeight;}
-window.addEventListener('resize',rs);rs();
-for(let i=0;i<100;i++)p.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*.3,vy:(Math.random()-0.5)*.3});
-function loop(){x.clearRect(0,0,W,H);p.forEach(a=>{a.x+=a.vx;a.y+=a.vy;if(a.x<0)a.x=W;if(a.x>W)a.x=0;if(a.y<0)a.y=H;if(a.y>H)a.y=0;x.fillStyle='rgba(0,240,255,0.12)';x.beginPath();x.arc(a.x,a.y,2,0,6.28);x.fill();});requestAnimationFrame(loop);}
-loop();
+// Animated neon lines
+const canvas=document.getElementById('lines-canvas'),ctx=canvas.getContext('2d');
+let lines=[],W=innerWidth,H=innerHeight;
+canvas.width=W; canvas.height=H;
+for(let i=0;i<60;i++)lines.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,length:Math.random()*60+20}));
+function animateLines(){
+  ctx.clearRect(0,0,W,H);
+  lines.forEach(l=>{
+    l.x+=l.vx; l.y+=l.vy;
+    if(l.x<0)l.x=W;if(l.x>W)l.x=0;if(l.y<0)l.y=H;if(l.y>H)l.y=0;
+    ctx.strokeStyle='rgba(0,240,255,0.12)';
+    ctx.beginPath();
+    ctx.moveTo(l.x,l.y);
+    ctx.lineTo(l.x+l.length/2,l.y+l.length/2);
+    ctx.stroke();
+  });
+  requestAnimationFrame(animateLines);
+}
+animateLines();
+window.addEventListener('resize',()=>{W=canvas.width=innerWidth;H=canvas.height=innerHeight;});
 
-/* Wallet Connect */
-async function connectWallet() {
+// Wallet Connect (MetaMask/Base)
+async function connectWallet(){
   if(window.ethereum){
     try{
-      const accounts = await window.ethereum.request({ method:'eth_requestAccounts' });
-      alert('Connected account: ' + accounts[0]);
-    }catch(err){alert('Connection rejected');}
-  } else {alert('No Web3 wallet detected. Install MetaMask or Base.');}
+      const accounts=await window.ethereum.request({method:'eth_requestAccounts'});
+      alert('Connected: '+accounts[0]);
+    }catch(e){alert('Connection rejected');}
+  }else alert('No Web3 wallet detected. Install MetaMask or Base.');
 }
 document.getElementById('connectHeader').onclick=connectWallet;
 document.getElementById('connectHero').onclick=connectWallet;
 
-/* Mobile modal */
+// Mobile modal
 const modal=document.getElementById('mobileModal');
 const modalBtn=document.getElementById('connectMobileBtn');
 const modalClose=document.getElementById('modalClose');
 modalBtn.onclick=()=>modal.style.display='flex';
 modalClose.onclick=()=>modal.style.display='none';
-window.onclick=(e)=>{if(e.target===modal)modal.style.display='none';}
+window.onclick=e=>{if(e.target===modal)modal.style.display='none';}
 </script>
 </body>
 </html>
