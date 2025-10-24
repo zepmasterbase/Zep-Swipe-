@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student & Vendor SuperApp Wallet</title>
+<title>Zep Swipe — Futuristic Neon Landing</title>
 
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -15,37 +15,39 @@
 
 <style>
   body {
-    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
     color: #fff;
+    scroll-behavior: smooth;
     overflow-x: hidden;
   }
 
-  h1, h2, h3 { font-family: 'Orbitron', sans-serif; }
+  h1,h2,h3 { font-family: 'Orbitron', sans-serif; }
 
   .neon-text {
-    background: linear-gradient(90deg, #00f0ff, #ff6ec7);
+    background: linear-gradient(90deg, #00f0ff, #ff00d4, #ff69b4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 12px rgba(0,255,255,0.3);
+    text-shadow: 0 0 12px rgba(0,255,255,0.4), 0 0 20px rgba(255,0,212,0.3);
   }
 
   .glass {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.06);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 1rem;
   }
 
   .gradient-btn {
-    background: linear-gradient(90deg, #00ffff, #ff6ec7);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: linear-gradient(90deg, #00ffff, #ff00d4, #ff69b4);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
   }
 
   .gradient-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 16px rgba(0,255,255,0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(0,255,255,0.5), 0 0 30px rgba(255,0,212,0.4);
   }
 
   .fade-up {
@@ -60,84 +62,70 @@
   }
 </style>
 </head>
-<body>
+<body id="top">
+
+<!-- Navbar -->
+<nav class="fixed top-0 left-0 w-full flex justify-between items-center px-6 py-4 glass z-50">
+  <a href="#top" class="text-2xl font-bold neon-text hover:scale-105 transition-transform">Zep Swipe</a>
+  <div class="relative group">
+    <button class="px-4 py-2 bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-500 text-black rounded-lg font-semibold">Menu ▼</button>
+    <div class="absolute right-0 mt-2 w-44 glass rounded-lg hidden group-hover:block border border-purple-500/30">
+      <a href="#learn-earn" class="block px-4 py-2 hover:bg-purple-500 hover:text-black transition">Learn</a>
+      <a href="#wishlist" class="block px-4 py-2 hover:bg-purple-500 hover:text-black transition">Wishlist</a>
+      <a href="https://zepmasterbase.github.io/Zep-Swipe-/#roadmap-1" target="_blank" class="block px-4 py-2 hover:bg-purple-500 hover:text-black transition">Roadmap</a>
+    </div>
+  </div>
+</nav>
 
 <!-- Hero Section -->
-<section class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24">
+<section class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-32">
   <div class="fade-up">
-    <h1 class="text-5xl md:text-6xl font-bold neon-text mb-6">SuperApp Wallet</h1>
-    <p class="max-w-2xl mx-auto text-gray-300 mb-8 text-lg">The ultimate digital wallet for students & vendors. Discover deals, list products, and manage your digital life seamlessly.</p>
-    <div class="flex flex-col md:flex-row gap-4 justify-center mb-4">
-      <button class="px-8 py-3 gradient-btn text-black font-semibold rounded-xl">Connect Wallet</button>
-      <button class="px-8 py-3 border-2 border-pink-400 text-pink-400 font-semibold rounded-xl hover:bg-pink-400 hover:text-black transition">Explore Deals</button>
+    <h1 class="text-5xl md:text-6xl font-bold neon-text mb-6">Zep Swipe</h1>
+    <p class="max-w-xl mx-auto text-gray-300 mb-8 text-lg">Africa’s futuristic checkout & borderless digital wallet — where payments meet innovation.</p>
+    <div class="flex flex-col md:flex-row gap-4 justify-center">
+      <button class="px-6 py-3 gradient-btn text-black font-semibold rounded-lg">Connect Wallet</button>
+      <button class="px-6 py-3 border-2 border-purple-400 text-purple-400 font-semibold rounded-lg hover:bg-purple-500 hover:text-black transition">Continue with Mobile</button>
     </div>
-    <p class="text-gray-400 text-sm">Secure, fast, and borderless transactions.</p>
+    <p class="mt-4 text-sm text-gray-400">Secure by blockchain. Powered by $ZAC.</p>
   </div>
 </section>
 
-<!-- Features Section -->
-<section class="fade-up py-24 px-6 max-w-6xl mx-auto">
-  <h2 class="text-4xl md:text-5xl font-bold neon-text mb-12 text-center">Features</h2>
-  <div class="grid md:grid-cols-3 gap-10">
-    <div class="glass p-6 rounded-xl hover:scale-105 transition-transform duration-300">
-      <h3 class="text-2xl font-bold mb-3">Student Deals</h3>
-      <p class="text-gray-300">Access exclusive discounts on digital products and services curated for students.</p>
-    </div>
-    <div class="glass p-6 rounded-xl hover:scale-105 transition-transform duration-300">
-      <h3 class="text-2xl font-bold mb-3">Vendor Listings</h3>
-      <p class="text-gray-300">List your digital products or services, reach students, and grow your business effortlessly.</p>
-    </div>
-    <div class="glass p-6 rounded-xl hover:scale-105 transition-transform duration-300">
-      <h3 class="text-2xl font-bold mb-3">Wallet & Payments</h3>
-      <p class="text-gray-300">Seamless wallet management with instant, secure digital transactions.</p>
-    </div>
-  </div>
+<!-- Learn & Earn Section -->
+<section id="learn-earn" class="fade-up py-20 px-6 text-center max-w-4xl mx-auto">
+  <h2 class="text-4xl font-bold neon-text mb-4">Learn & Earn</h2>
+  <p class="text-gray-300 mb-6">Learn blockchain payments, earn crypto rewards, and grow your Web3 knowledge.</p>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBjWItPmUzfEDcz4FrOS8-9vnuLC31q6cfxQKihW-FmhCO_Q/viewform?usp=send_form" target="_blank" class="px-8 py-3 gradient-btn text-black font-semibold rounded-lg">Start Learning</a>
 </section>
 
-<!-- Digital Products Showcase -->
-<section class="fade-up py-24 px-6 max-w-6xl mx-auto text-center">
-  <h2 class="text-4xl md:text-5xl font-bold neon-text mb-12">Top Digital Products</h2>
-  <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-    <div class="glass p-6 rounded-xl hover:scale-105 transition-transform duration-300">
-      <h3 class="font-semibold mb-2">Ebook: Learn Blockchain</h3>
-      <p class="text-gray-300 mb-4">$10 — Instant Download</p>
-      <button class="px-6 py-2 gradient-btn text-black font-semibold rounded-lg">Buy Now</button>
-    </div>
-    <div class="glass p-6 rounded-xl hover:scale-105 transition-transform duration-300">
-      <h3 class="font-semibold mb-2">Coding Templates</h3>
-      <p class="text-gray-300 mb-4">$15 — Immediate Access</p>
-      <button class="px-6 py-2 gradient-btn text-black font-semibold rounded-lg">Buy Now</button>
-    </div>
-    <div class="glass p-6 rounded-xl hover:scale-105 transition-transform duration-300">
-      <h3 class="font-semibold mb-2">Design Assets</h3>
-      <p class="text-gray-300 mb-4">$12 — Downloadable</p>
-      <button class="px-6 py-2 gradient-btn text-black font-semibold rounded-lg">Buy Now</button>
-    </div>
-  </div>
-</section>
-
-<!-- Call-to-Action Section -->
-<section class="fade-up py-20 px-6 text-center glass rounded-xl max-w-3xl mx-auto">
-  <h2 class="text-3xl md:text-4xl font-bold neon-text mb-4">Get Started Today</h2>
-  <p class="text-gray-300 mb-6">Join students and vendors already enjoying borderless transactions and exclusive deals.</p>
-  <div class="flex flex-col md:flex-row justify-center gap-4">
-    <button class="px-8 py-3 gradient-btn text-black font-semibold rounded-xl">Sign Up</button>
-    <button class="px-8 py-3 border-2 border-pink-400 text-pink-400 font-semibold rounded-xl hover:bg-pink-400 hover:text-black transition">Learn More</button>
-  </div>
+<!-- Wishlist Section -->
+<section id="wishlist" class="fade-up py-20 px-6 max-w-2xl mx-auto text-center glass">
+  <h2 class="text-3xl font-bold neon-text mb-4">Join Wishlist</h2>
+  <p class="text-gray-300 mb-6">Sign up for early access and be part of Africa’s digital payment revolution.</p>
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLSfBjWItPmUzfEDcz4FrOS8-9vnuLC31q6cfxQKihW-FmhCO_Q/viewform?usp=send_form" target="_blank" class="flex flex-col gap-3">
+    <input type="text" placeholder="University Name" class="p-3 rounded-lg bg-[#0a0a0a] text-white border border-gray-600 focus:border-pink-500 focus:outline-none">
+    <input type="email" placeholder="Email Address" class="p-3 rounded-lg bg-[#0a0a0a] text-white border border-gray-600 focus:border-pink-500 focus:outline-none">
+    <select class="p-3 rounded-lg bg-[#0a0a0a] text-white border border-gray-600 focus:border-pink-500 focus:outline-none">
+      <option value="">Country of Origin</option>
+      <option>South Africa</option>
+      <option>Ghana</option>
+      <option>Kenya</option>
+      <option>Nigeria</option>
+      <option>Uganda</option>
+    </select>
+    <button type="submit" class="px-6 py-3 gradient-btn text-black font-semibold rounded-lg">Submit</button>
+  </form>
 </section>
 
 <!-- Footer -->
-<footer class="py-12 text-center text-gray-400 text-sm border-t border-pink-500/20">
-  © 2025 SuperApp Wallet. Empowering students & vendors across digital marketplaces.
+<footer class="py-8 text-center text-gray-400 text-sm border-t border-purple-500/20">
+  © 2025 Zep Swipe. Built for Africa’s innovators. Powered by blockchain.
 </footer>
 
-<!-- Fade-up animation -->
+<!-- Fade-Up Animation -->
 <script>
   const fadeEls = document.querySelectorAll('.fade-up');
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) entry.target.classList.add('visible');
-    });
+    entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   fadeEls.forEach(el => observer.observe(el));
 </script>
