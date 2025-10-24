@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -51,8 +52,14 @@
 
   <!-- Navbar -->
   <nav class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
-    <!-- Left: Neon Logo Text -->
-    <h1 class="text-3xl md:text-4xl font-bold neon-text">Zep Swipe</h1>
+    <!-- Left: Logo linked to top -->
+    <a href="#top" class="flex items-center">
+      <img
+        src="https://files.oaiusercontent.com/file-uC4v4sTgA9STTsvDkNlyBbiR?se=2025-10-24T23%3A59%3A59Z&sp=r&sv=2022-11-02&sr=b&rscd=inline%3B%20filename%3Dzep_logo.png"
+        alt="Zep Swipe Logo"
+        class="w-12 h-12 md:w-14 md:h-14 rounded-full hover:scale-105 transition-transform duration-300"
+      />
+    </a>
 
     <!-- Right: Dropdown Menu -->
     <div class="relative group">
@@ -80,7 +87,8 @@
           >Join Wishlist</a
         >
         <a
-          href="#roadmap"
+          href="https://zepmasterbase.github.io/Zep-Swipe-/#roadmap-1"
+          target="_blank"
           class="block px-4 py-2 hover:bg-cyan-400 hover:text-black transition"
           >Roadmap</a
         >
@@ -89,9 +97,7 @@
   </nav>
 
   <!-- Hero Section -->
-  <section
-    class="flex flex-col items-center justify-center text-center mt-16 px-6"
-  >
+  <section id="top" class="flex flex-col items-center justify-center text-center mt-16 px-6">
     <img
       src="https://files.oaiusercontent.com/file-uC4v4sTgA9STTsvDkNlyBbiR?se=2025-10-24T23%3A59%3A59Z&sp=r&sv=2022-11-02&sr=b&rscd=inline%3B%20filename%3Dzep_logo.png"
       alt="Zep Swipe Logo"
@@ -208,15 +214,6 @@
         </p>
       </div>
     </div>
-  </section>
-
-  <!-- Roadmap Section -->
-  <section id="roadmap" class="mt-24 px-6 max-w-6xl mx-auto text-center">
-    <h2 class="text-4xl md:text-5xl font-bold neon-text mb-6">Roadmap</h2>
-    <p class="text-gray-300 mb-8">
-      Coming soon: Our journey and milestones to revolutionize digital payments
-      in Africa.
-    </p>
   </section>
 
   <!-- Footer -->
