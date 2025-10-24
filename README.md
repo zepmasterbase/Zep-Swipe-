@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -9,24 +10,122 @@
 
 <style>
 :root{
-  --bg-a:#0f1630; --bg-b:#201a3a; --accent-1:#00f0ff; --accent-2:#ff00d4; --accent-3:#ff69b4;
+  --bg-a:#0f1630; 
+  --bg-b:#201a3a; 
+  --accent-1:#00f0ff; 
+  --accent-2:#ff00d4; 
+  --accent-3:#ff69b4;
 }
-body{margin:0;font-family:'Inter',system-ui,Arial;background:linear-gradient(135deg,var(--bg-a) 0%,#15102b 50%,var(--bg-b) 100%);color:#eaf2ff;overflow-x:hidden;}
+body{
+  margin:0;
+  font-family:'Inter',system-ui,Arial;
+  background:linear-gradient(135deg,var(--bg-a) 0%,#15102b 50%,var(--bg-b) 100%);
+  color:#eaf2ff;
+  overflow-x:hidden;
+}
 h1,h2,h3{font-family:'Orbitron',sans-serif;}
-.neon-text{background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.glass{background:rgba(255,255,255,0.04);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.05);border-radius:12px;}
-.cta-main{background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));color:#000;}
-.cta-main:hover{transform:translateY(-3px);}
-.float-card{transition:transform .35s,box-shadow .25s;}
-.float-card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(5,6,12,0.6);}
-.token-pill{display:inline-flex;gap:.5rem;align-items:center;padding:.35rem .6rem;border-radius:999px;font-weight:600;font-size:.92rem;background:rgba(255,255,255,0.05);}
-#particle-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.neon-text{
+  background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.glass{
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:12px;
+}
+.cta-main{
+  background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));
+  color:#000;
+  transition:transform 0.3s;
+}
+.cta-main:hover{
+  transform:translateY(-3px);
+}
+.float-card{
+  transition:transform .35s,box-shadow .25s;
+}
+.float-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 18px 40px rgba(5,6,12,0.6);
+}
+.token-pill{
+  display:inline-flex;
+  gap:.5rem;
+  align-items:center;
+  padding:.35rem .6rem;
+  border-radius:999px;
+  font-weight:600;
+  font-size:.92rem;
+  background:rgba(255,255,255,0.05);
+}
+#particle-canvas{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
 @media (max-width:768px){.header-center{display:none;}}
+
 /* Modal */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:1000;}
-.modal-content{background:#11142a;padding:2rem;border-radius:12px;max-width:400px;width:90%;position:relative;}
-.modal-content input{width:100%;padding:.75rem;border-radius:8px;margin-bottom:1rem;border:none;outline:none;}
-.modal-close{position:absolute;top:10px;right:12px;font-size:20px;cursor:pointer;color:#ff69b4;}
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
+.modal-content{
+  background:#11142a;
+  padding:2rem;
+  border-radius:12px;
+  max-width:400px;
+  width:90%;
+  position:relative;
+}
+.modal-content input{
+  width:100%;
+  padding:.75rem;
+  border-radius:8px;
+  margin-bottom:1rem;
+  border:none;
+  outline:none;
+}
+.modal-close{
+  position:absolute;
+  top:10px;
+  right:12px;
+  font-size:20px;
+  cursor:pointer;
+  color:#ff69b4;
+}
+
+/* Roadmap */
+.roadmap-step{
+  position: relative;
+}
+.roadmap-step::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:14px;
+  width:2px;
+  height:100%;
+  background:rgba(255,255,255,0.1);
+  z-index:-1;
+}
+.roadmap-dot{
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));
+  position:absolute;
+  left:7px;
+  top:0;
+}
 </style>
 </head>
 <body>
@@ -68,7 +167,6 @@ h1,h2,h3{font-family:'Orbitron',sans-serif;}
       </div>
     </div>
 
-    <!-- Web3 abstract SVG -->
     <div class="rounded-xl overflow-hidden shadow-lg flex items-center justify-center bg-gradient-to-br from-[#221b3a] to-[#181033] h-80 md:h-96 relative">
       <svg viewBox="0 0 400 400" class="w-4/5 h-4/5">
         <defs>
@@ -102,10 +200,48 @@ h1,h2,h3{font-family:'Orbitron',sans-serif;}
   <h2 class="text-3xl font-bold neon-text mb-4">How Students Earn</h2>
   <p class="text-gray-300 mb-6">Quiz → Reward → Wallet → Vendor</p>
   <div class="grid sm:grid-cols-4 gap-4 max-w-5xl mx-auto">
-    <div class="glass p-4 rounded-lg float-card"><div class="font-semibold text-xl mb-2">1. Quiz</div><p class="text-gray-300 text-sm">Take short interactive quizzes.</p></div>
-    <div class="glass p-4 rounded-lg float-card"><div class="font-semibold text-xl mb-2">2. Reward</div><p class="text-gray-300 text-sm">Earn $ZAC instantly.</p></div>
-    <div class="glass p-4 rounded-lg float-card"><div class="font-semibold text-xl mb-2">3. Wallet</div><p class="text-gray-300 text-sm">Store rewards securely.</p></div>
-    <div class="glass p-4 rounded-lg float-card"><div class="font-semibold text-xl mb-2">4. Vendor</div><p class="text-gray-300 text-sm">Spend or swap at partners.</p></div>
+    <div class="glass p-4 rounded-lg float-card flex flex-col items-center">
+      <img src="https://img.icons8.com/ios-filled/50/00f0ff/quiz.png" class="mb-2 w-12 h-12"/>
+      <div class="font-semibold text-xl mb-2">1. Quiz</div>
+      <p class="text-gray-300 text-sm">Take short interactive quizzes.</p>
+    </div>
+    <div class="glass p-4 rounded-lg float-card flex flex-col items-center">
+      <img src="https://img.icons8.com/ios-filled/50/ff00d4/reward.png" class="mb-2 w-12 h-12"/>
+      <div class="font-semibold text-xl mb-2">2. Reward</div>
+      <p class="text-gray-300 text-sm">Earn $ZAC instantly.</p>
+    </div>
+    <div class="glass p-4 rounded-lg float-card flex flex-col items-center">
+      <img src="https://img.icons8.com/ios-filled/50/ff69b4/wallet.png" class="mb-2 w-12 h-12"/>
+      <div class="font-semibold text-xl mb-2">3. Wallet</div>
+      <p class="text-gray-300 text-sm">Store rewards securely.</p>
+    </div>
+    <div class="glass p-4 rounded-lg float-card flex flex-col items-center">
+      <img src="https://img.icons8.com/ios-filled/50/00f0ff/shop.png" class="mb-2 w-12 h-12"/>
+      <div class="font-semibold text-xl mb-2">4. Vendor</div>
+      <p class="text-gray-300 text-sm">Spend or swap at partners.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="py-12 px-4 text-center max-w-4xl mx-auto">
+  <h2 class="text-3xl font-bold neon-text mb-6">Roadmap</h2>
+  <div class="relative ml-6">
+    <div class="roadmap-step mb-8 pl-8">
+      <div class="roadmap-dot"></div>
+      <h3 class="font-semibold text-lg neon-text">Phase 1 — Beta Launch</h3>
+      <p class="text-gray-300 text-sm">Initial rollout to select students with quizzes and wallet integration.</p>
+    </div>
+    <div class="roadmap-step mb-8 pl-8">
+      <div class="roadmap-dot"></div>
+      <h3 class="font-semibold text-lg neon-text">Phase 2 — Vendor Partnerships</h3>
+      <p class="text-gray-300 text-sm">Collaborate with campus vendors for redeeming $ZAC.</p>
+    </div>
+    <div class="roadmap-step mb-8 pl-8">
+      <div class="roadmap-dot"></div>
+      <h3 class="font-semibold text-lg neon-text">Phase 3 — Full Launch</h3>
+      <p class="text-gray-300 text-sm">Open platform to all students across Africa with staking and rewards features.</p>
+    </div>
   </div>
 </section>
 
@@ -136,7 +272,7 @@ for(let i=0;i<100;i++)p.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.rando
 function loop(){x.clearRect(0,0,W,H);p.forEach(a=>{a.x+=a.vx;a.y+=a.vy;if(a.x<0)a.x=W;if(a.x>W)a.x=0;if(a.y<0)a.y=H;if(a.y>H)a.y=0;x.fillStyle='rgba(0,240,255,0.12)';x.beginPath();x.arc(a.x,a.y,2,0,6.28);x.fill();});requestAnimationFrame(loop);}
 loop();
 
-/* Wallet Connect (MetaMask/Base) */
+/* Wallet Connect */
 async function connectWallet() {
   if(window.ethereum){
     try{
@@ -156,3 +292,5 @@ modalBtn.onclick=()=>modal.style.display='flex';
 modalClose.onclick=()=>modal.style.display='none';
 window.onclick=(e)=>{if(e.target===modal)modal.style.display='none';}
 </script>
+</body>
+</html>
