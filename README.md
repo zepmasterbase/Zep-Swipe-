@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -62,40 +61,28 @@
     transform: translateY(0);
   }
 
-  /* Floating $ZAC with soft glow trail */
-  .floating-zac {
-    position: absolute;
-    font-weight: bold;
-    color: #00ffff;
-    text-shadow: 0 0 8px #00ffff, 0 0 16px #ff00d4, 0 0 24px #ff69b4;
-    animation: floatZAC linear infinite;
+  /* Canvas particles */
+  #particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
-    will-change: transform, opacity;
+    z-index: 0;
   }
 
-  @keyframes floatZAC {
-    0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
-    50% { transform: translateY(-50px) rotate(10deg); opacity: 0.6; }
-    100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+  section {
+    position: relative;
+    z-index: 1;
   }
 
-  /* Particle orbs behind sections */
-  .particle-orb {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.25;
-    pointer-events: none;
-    animation: floatOrb linear infinite;
-  }
-
-  @keyframes floatOrb {
-    0% { transform: translateY(0) translateX(0); }
-    50% { transform: translateY(-50px) translateX(30px); }
-    100% { transform: translateY(0) translateX(0); }
-  }
 </style>
 </head>
 <body id="top">
+
+<!-- Particle Canvas -->
+<canvas id="particle-canvas"></canvas>
 
 <!-- Navbar -->
 <nav class="fixed top-0 left-0 w-full flex justify-between items-center px-6 py-4 glass z-50">
@@ -111,13 +98,8 @@
 </nav>
 
 <!-- Hero Section -->
-<section class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-32 relative overflow-hidden">
-  <!-- Neon Particle Orbs -->
-  <div class="particle-orb bg-cyan-400 w-12 h-12" style="top:10%; left:20%; animation-duration:12s;"></div>
-  <div class="particle-orb bg-pink-500 w-8 h-8" style="top:60%; left:70%; animation-duration:8s;"></div>
-  <div class="particle-orb bg-purple-500 w-10 h-10" style="top:40%; left:50%; animation-duration:10s;"></div>
-
-  <div class="fade-up relative z-10">
+<section class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-32">
+  <div class="fade-up">
     <h1 class="text-5xl md:text-6xl font-bold neon-text mb-6">Zep Swipe</h1>
     <p class="max-w-xl mx-auto text-gray-300 mb-8 text-lg">Africa’s futuristic checkout & borderless digital wallet — where payments meet innovation.</p>
     <div class="flex flex-col md:flex-row gap-4 justify-center">
@@ -129,20 +111,14 @@
 </section>
 
 <!-- Learn & Earn Section -->
-<section id="learn-earn" class="fade-up py-20 px-6 text-center max-w-4xl mx-auto relative overflow-hidden">
-  <div class="particle-orb bg-cyan-400 w-10 h-10" style="top:20%; left:15%; animation-duration:14s;"></div>
-  <div class="particle-orb bg-purple-500 w-12 h-12" style="top:70%; left:80%; animation-duration:9s;"></div>
-
+<section id="learn-earn" class="fade-up py-20 px-6 text-center max-w-4xl mx-auto">
   <h2 class="text-4xl font-bold neon-text mb-4">Learn & Earn</h2>
   <p class="text-gray-300 mb-6">Learn blockchain payments, earn crypto rewards, and grow your Web3 knowledge.</p>
   <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBjWItPmUzfEDcz4FrOS8-9vnuLC31q6cfxQKihW-FmhCO_Q/viewform?usp=send_form" target="_blank" class="px-8 py-3 gradient-btn text-black font-semibold rounded-lg">Start Learning</a>
 </section>
 
 <!-- Wishlist Section -->
-<section id="wishlist" class="fade-up py-20 px-6 max-w-2xl mx-auto text-center glass relative overflow-hidden">
-  <div class="particle-orb bg-pink-500 w-10 h-10" style="top:30%; left:25%; animation-duration:13s;"></div>
-  <div class="particle-orb bg-cyan-400 w-8 h-8" style="top:60%; left:70%; animation-duration:11s;"></div>
-
+<section id="wishlist" class="fade-up py-20 px-6 max-w-2xl mx-auto text-center glass">
   <h2 class="text-3xl font-bold neon-text mb-4">Join Wishlist</h2>
   <p class="text-gray-300 mb-6">Sign up for early access and be part of Africa’s digital payment revolution.</p>
   <form action="https://docs.google.com/forms/d/e/1FAIpQLSfBjWItPmUzfEDcz4FrOS8-9vnuLC31q6cfxQKihW-FmhCO_Q/viewform?usp=send_form" target="_blank" class="flex flex-col gap-3">
@@ -165,36 +141,58 @@
   © 2025 Zep Swipe. Built for Africa’s innovators. Powered by blockchain.
 </footer>
 
-<!-- Scripts -->
+<!-- Fade-Up Animation -->
 <script>
-  // Fade-up animation
   const fadeEls = document.querySelectorAll('.fade-up');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   fadeEls.forEach(el => observer.observe(el));
+</script>
 
-  // Floating $ZAC currency with soft trail effect
-  const zacCount = 12;
-  for(let i=0;i<zacCount;i++){
-    const zac = document.createElement('div');
-    zac.className = 'floating-zac';
-    zac.textContent = '$ZAC';
-    zac.style.left = Math.random() * window.innerWidth + 'px';
-    zac.style.top = Math.random() * window.innerHeight + 'px';
-    zac.style.fontSize = (14 + Math.random() * 16) + 'px';
-    zac.style.animationDuration = (5 + Math.random() * 5) + 's';
-    document.body.appendChild(zac);
+<!-- Particle Script -->
+<script>
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let w, h;
 
-    // Create trail clones
-    for(let t=1; t<=3; t++){
-      const trail = zac.cloneNode(true);
-      trail.style.opacity = 0.3 / t;
-      trail.style.filter = `blur(${t*2}px)`;
-      trail.style.animationDuration = (5 + Math.random() * 5) + 's';
-      document.body.appendChild(trail);
+  function initCanvas() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    particles = [];
+    for (let i = 0; i < 80; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 3 + 1,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5,
+        color: `rgba(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},255,0.3)`
+      });
     }
   }
+
+  function animate() {
+    ctx.clearRect(0,0,w,h);
+    particles.forEach(p => {
+      p.x += p.dx;
+      p.y += p.dy;
+
+      if(p.x < 0 || p.x > w) p.dx *= -1;
+      if(p.y < 0 || p.y > h) p.dy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = p.color;
+      ctx.fill();
+    });
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', initCanvas);
+  initCanvas();
+  animate();
 </script>
 
 </body>
