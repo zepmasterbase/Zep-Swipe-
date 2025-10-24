@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -19,10 +19,6 @@
       transform: translateY(-2px);
       transition: all 0.3s ease-in-out;
     }
-    .glass-card {
-      background: rgba(0, 31, 63, 0.7);
-      backdrop-filter: blur(10px);
-    }
   </style>
 </head>
 <body class="bg-gradient-to-br from-[#0a0a0a] via-[#001f3f] to-[#003366] text-white min-h-screen">
@@ -32,10 +28,9 @@
     <h1 class="text-2xl md:text-3xl font-bold neon-text">Zep Swipe</h1>
     <div class="space-x-6">
       <a href="#features" class="hover:text-cyan-400 transition">Features</a>
-      <a href="#pricing" class="hover:text-cyan-400 transition">Pricing</a>
-      <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBjWItPmUzfEDcz4FrOS8-9vnuLC31q6cfxQKihW-FmhCO_Q/viewform?usp=send_form" target="_blank" class="px-4 py-2 bg-cyan-500 text-black rounded-lg font-semibold hover:bg-cyan-400 transition">Learn & Earn</a>
-      <a href="#roadmap" class="px-4 py-2 border-2 border-cyan-400 rounded-lg hover:bg-cyan-400 hover:text-black transition">Join Wishlist</a>
+      <a href="#learn-earn" class="hover:text-cyan-400 transition">Learn & Earn</a>
+      <a href="#wishlist" class="hover:text-cyan-400 transition">Join Wishlist</a>
+      <a href="#roadmap" class="hover:text-cyan-400 transition">Roadmap</a>
     </div>
   </nav>
 
@@ -56,17 +51,65 @@
     <p class="mt-6 text-sm text-gray-400">Secure by blockchain. Powered by $ZAC.</p>
   </section>
 
+  <!-- Learn & Earn Placeholder -->
+  <section id="learn-earn" class="mt-20 px-6 max-w-6xl mx-auto text-center">
+    <h2 class="text-4xl md:text-5xl font-bold neon-text mb-6">Learn & Earn</h2>
+    <p class="text-gray-300 mb-12">Interactive modules coming soon! Earn rewards as you learn about blockchain and Zep Swipe features.</p>
+    <div class="bg-[#001f3f] p-8 rounded-xl shadow-lg">
+      <p class="text-gray-300">[Placeholder for Learn & Earn content]</p>
+    </div>
+  </section>
+
   <!-- Features Section -->
   <section id="features" class="mt-20 px-6 max-w-6xl mx-auto">
     <h2 class="text-4xl md:text-5xl font-bold text-center neon-text mb-12">Features</h2>
     <div class="grid md:grid-cols-3 gap-12">
-      <div class="glass-card p-6 rounded-xl shadow-lg hover:scale-105 transition">
+      <div class="bg-[#001f3f] p-6 rounded-xl shadow-lg hover:scale-105 transition">
         <h3 class="text-2xl font-bold mb-4">Instant Checkout</h3>
         <p class="text-gray-300">Complete payments in a single swipe without delays.</p>
       </div>
-      <div class="glass-card p-6 rounded-xl shadow-lg hover:scale-105 transition">
+      <div class="bg-[#001f3f] p-6 rounded-xl shadow-lg hover:scale-105 transition">
         <h3 class="text-2xl font-bold mb-4">Borderless Wallet</h3>
         <p class="text-gray-300">Send and receive money across Africa seamlessly.</p>
       </div>
-      <div class="glass-card p-6 rounded-xl shadow-lg hover:scale-105 transition">
-        <h3 class="text
+      <div class="bg-[#001f3f] p-6 rounded-xl shadow-lg hover:scale-105 transition">
+        <h3 class="text-2xl font-bold mb-4">Blockchain Security</h3>
+        <p class="text-gray-300">Your transactions are secured on a decentralized ledger.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Join Wishlist Section -->
+  <section id="wishlist" class="mt-20 px-6 max-w-3xl mx-auto bg-[#002244] p-12 rounded-xl shadow-lg text-center">
+    <h2 class="text-4xl md:text-5xl font-bold neon-text mb-6">Join Our Wishlist</h2>
+    <p class="text-gray-300 mb-8">Sign up to stay updated and be part of the Zep Swipe launch.</p>
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSfBjWItPmUzfEDcz4FrOS8-9vnuLC31q6cfxQKihW-FmhCO_Q/viewform?usp=send_form" target="_blank" method="get" class="flex flex-col gap-6">
+      <input type="text" name="entry.123456" placeholder="School" class="p-4 rounded-lg text-black" required>
+      <input type="email" name="entry.654321" placeholder="Email" class="p-4 rounded-lg text-black" required>
+      <select name="entry.789012" class="p-4 rounded-lg text-black" required>
+        <option value="" disabled selected>Select your Country</option>
+        <option value="South Africa">South Africa</option>
+        <option value="Ghana">Ghana</option>
+        <option value="Kenya">Kenya</option>
+        <option value="Nigeria">Nigeria</option>
+        <option value="Uganda">Uganda</option>
+      </select>
+      <button type="submit" class="px-8 py-4 bg-cyan-500 text-black font-semibold rounded-xl shadow button-glow transition">
+        Join Now
+      </button>
+    </form>
+  </section>
+
+  <!-- Roadmap Section -->
+  <section id="roadmap" class="mt-20 px-6 max-w-6xl mx-auto text-center">
+    <h2 class="text-4xl md:text-5xl font-bold neon-text mb-6">Roadmap</h2>
+    <p class="text-gray-300">[Placeholder for roadmap content]</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-32 py-8 text-center text-gray-400 text-sm">
+    © 2025 Zep Swipe. Built for students. Powered by blockchain.
+  </footer>
+
+</body>
+</html>
