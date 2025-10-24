@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -7,69 +8,81 @@
 <!-- Tailwind CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Fonts -->
+<!-- Google fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --accent-1: #00f0ff;
-    --accent-2: #ff00d4;
-    --accent-3: #ff69b4;
+    --bg-a:#0f1630;
+    --bg-b:#201a3a;
+    --accent-1:#00f0ff;
+    --accent-2:#ff00d4;
+    --accent-3:#ff69b4;
   }
-  html,body { height:100%; }
+  html,body{height:100%;}
   body{
     margin:0;
-    font-family:'Inter',sans-serif;
-    background: linear-gradient(135deg,#0f1630 0%, #1b1940 45%, #201a3a 100%);
-    color: #eef6ff;
+    font-family:'Inter',system-ui,Arial;
+    background: linear-gradient(135deg,var(--bg-a) 0%, #15102b 50%, var(--bg-b) 100%);
+    color:#eaf2ff;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
-  h1,h2,h3 { font-family:'Orbitron',sans-serif; }
 
+  h1,h2,h3{ font-family:'Orbitron',sans-serif; }
+
+  /* Neon heading style */
   .neon-text {
-    background: linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 10px rgba(0,240,255,0.12);
+    text-shadow: 0 0 10px rgba(0,240,255,0.12), 0 0 20px rgba(255,0,212,0.06);
   }
 
+  /* glass */
   .glass {
     background: rgba(255,255,255,0.04);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.04);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.05);
     border-radius: 12px;
   }
 
-  .gradient-btn {
-    background: linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));
-    transition: transform .18s ease, box-shadow .25s ease;
+  /* CTA */
+  .cta-main {
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+    color: #000;
   }
-  .gradient-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.45); }
+  .cta-main:hover { transform: translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,0.45); }
 
-  .float-y { transition: transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .25s ease; }
-  .float-y:hover { transform: translateY(-8px); box-shadow: 0 18px 40px rgba(0,0,0,0.45); }
+  /* subtle floating card */
+  .float-card{ transition: transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .25s; }
+  .float-card:hover{ transform: translateY(-8px); box-shadow: 0 18px 40px rgba(5,6,12,0.6); }
 
-  #particle-canvas { position: fixed; inset:0; z-index:0; pointer-events:none; }
-
-  section, nav, footer, .modal { position: relative; z-index: 5; }
-
-  /* lighter image overlay for readability */
-  .img-overlay::after{
-    content:'';
-    position:absolute; inset:0;
-    background: linear-gradient(180deg, rgba(20,20,30,0.08), rgba(10,8,20,0.18));
-    pointer-events:none;
+  /* small token pill */
+  .token-pill {
+    display:inline-flex; gap:.5rem; align-items:center;
+    padding: .35rem .6rem; border-radius:999px; font-weight:600; font-size:.92rem;
+    background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.04);
   }
 
-  /* modal styles */
-  .modal-backdrop { background: rgba(5,5,10,0.6); backdrop-filter: blur(3px); }
-  .token-pill { display:inline-flex; gap:.5rem; align-items:center; padding:.35rem .6rem; border-radius:999px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.04); font-weight:600; }
+  /* particle canvas */
+  #particle-canvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
 
-  @media (max-width:640px){
-    .nav-actions { gap:.5rem; }
+  /* make sure content is above canvas */
+  header, section, footer, .modal { position:relative; z-index:5; }
+
+  /* image placeholder styles */
+  .img-fallback {
+    display:flex; align-items:center; justify-content:center;
+    background: linear-gradient(135deg,#2b2145,#2d234e); color:#cfeeff; font-weight:600;
+  }
+
+  /* responsive header layout tweaks */
+  @media (max-width: 768px){
+    .header-center { display:none; } /* hide token in center on small screens */
   }
 </style>
 </head>
@@ -78,251 +91,223 @@
 <!-- Particle canvas -->
 <canvas id="particle-canvas"></canvas>
 
-<!-- NAV -->
-<nav class="fixed w-full top-4 left-0 flex justify-center z-50">
-  <div class="w-[95%] max-w-6xl flex items-center justify-between px-4 py-3 glass">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-full overflow-hidden ring-1 ring-white/6">
-        <!-- light logo (picsum seeded) -->
-        <img src="https://picsum.photos/seed/logo/80/80" alt="logo" class="w-full h-full object-cover">
-      </div>
-      <a href="#top" class="text-lg md:text-xl font-bold neon-text">Zep Swipe</a>
-      <div class="hidden md:flex items-center gap-3 ml-3">
-        <span class="text-xs text-gray-300">Powered by</span>
-        <span class="token-pill"><strong>$ZAC</strong><span class="text-xs text-gray-300">+ USDT</span></span>
-      </div>
-    </div>
-
-    <div class="flex items-center gap-3 nav-actions">
-      <!-- Always visible: Connect + Mobile -->
-      <button id="connectBtn" class="px-3 py-2 rounded-lg gradient-btn text-black font-semibold text-sm">Connect Wallet</button>
-      <button id="mobileBtn" class="px-3 py-2 rounded-lg glass text-sm">Continue with Mobile</button>
-
-      <!-- small menu -->
-      <div class="relative">
-        <button class="px-3 py-2 text-sm rounded-md glass">Menu ▾</button>
-        <div class="absolute right-0 mt-2 w-44 glass rounded-lg hidden group-hover:block border border-white/6">
-          <a href="#earn-steps" class="block px-4 py-2 hover:bg-purple-600/30">How to earn</a>
-          <a href="#testimonials" class="block px-4 py-2 hover:bg-purple-600/30">Stories</a>
-          <a href="#wishlist" class="block px-4 py-2 hover:bg-purple-600/30">Early access</a>
-        </div>
-      </div>
-    </div>
+<!-- Header: sleek flow -->
+<header class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl flex items-center justify-between px-4 py-2 glass shadow z-50">
+  <!-- Left: neon title (no image beside it) -->
+  <div class="flex items-center gap-4">
+    <a href="#top" class="text-xl font-bold neon-text" aria-label="Zep Swipe home">Zep Swipe</a>
+    <span class="hidden sm:inline text-sm text-gray-300">Campus Wallet • Student Rewards</span>
   </div>
-</nav>
 
-<!-- HERO -->
-<header id="top" class="pt-28 pb-8">
-  <div class="max-w-6xl mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-      <div class="space-y-4">
-        <h1 class="text-4xl md:text-5xl font-bold neon-text leading-tight">Zep Swipe — Campus Wallet for Students</h1>
-        <p class="text-gray-300 max-w-xl">Earn $ZAC with tiny quizzes and campus tasks, store tokens in your mobile wallet, and spend at campus vendors. Fast, social, and student-first.</p>
+  <!-- Center (desktop only): token badge -->
+  <div class="header-center token-pill hidden md:inline-flex">
+    <strong class="text-white">$ZAC</strong>
+    <span class="text-xs text-gray-300">+ USDT</span>
+  </div>
 
-        <div class="flex flex-wrap gap-3 mt-4">
-          <button id="connectBtnHero" class="px-6 py-3 gradient-btn text-black rounded-lg font-semibold float-y">Connect Wallet</button>
-          <a href="https://forms.gle/7Pr7gLySfroWMptC9" target="_blank" class="px-5 py-3 border border-white/10 rounded-lg text-sm glass float-y">Start Quiz</a>
-          <a href="#wishlist" class="px-5 py-3 bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 text-black rounded-lg font-semibold float-y">Get Early Access — Free ZAC</a>
-        </div>
+  <!-- Right: connect + menu -->
+  <nav class="flex items-center gap-3">
+    <button id="connectHeader" class="px-4 py-2 rounded-lg cta-main font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-300">Connect Wallet</button>
 
-        <!-- quick token ribbon -->
-        <div class="mt-3 inline-flex items-center gap-3 glass px-3 py-2 rounded-full">
-          <img src="https://picsum.photos/seed/token/40/40" alt="$ZAC" class="w-8 h-8 rounded-full object-cover">
-          <div>
-            <div class="text-xs text-gray-300">Token</div>
-            <div class="font-semibold neon-text">$ZAC • Rewards</div>
-          </div>
-        </div>
-
-        <!-- testimonial inline -->
-        <div class="mt-4 glass p-3 rounded-lg flex gap-3 items-center">
-          <img src="https://picsum.photos/seed/student1/60/60" alt="student" class="w-12 h-12 rounded-full object-cover">
-          <div>
-            <div class="text-sm italic text-gray-200">“I earned ZAC after a 2-min quiz and used it for campus coffee — seamless.”</div>
-            <div class="text-xs text-gray-300 mt-1">— Amina, University</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="relative">
-        <div class="rounded-xl overflow-hidden img-overlay shadow-xl">
-          <!-- lighter, bright campus image from picsum -->
-          <img src="https://picsum.photos/seed/campus1/900/600" alt="Campus students" class="w-full h-[360px] object-cover md:h-[460px]">
-        </div>
-
-        <!-- small floating balance card -->
-        <div class="absolute bottom-6 left-6 glass p-4 rounded-xl max-w-sm float-y w-[85%] md:w-80">
-          <div class="flex items-center justify-between">
-            <div>
-              <div class="text-sm text-gray-300">Quick Win</div>
-              <div class="font-semibold neon-text">Take a 2-min Quiz → Earn ZAC</div>
-            </div>
-            <div class="text-right">
-              <div class="text-xs text-gray-300">Balance</div>
-              <div class="font-bold">$ZAC <span class="text-xs text-gray-300">+ USDT</span></div>
-            </div>
-          </div>
-        </div>
+    <div class="relative">
+      <button id="menuBtn" class="px-3 py-2 rounded-md glass text-sm">Menu ▾</button>
+      <div id="menuDrop" class="absolute right-0 mt-2 w-44 glass rounded-lg hidden border border-white/5">
+        <a href="#earn-steps" class="block px-4 py-2 hover:bg-purple-600/30">How it works</a>
+        <a href="#learn-earn" class="block px-4 py-2 hover:bg-purple-600/30">Learn & Earn</a>
+        <a href="#wishlist" class="block px-4 py-2 hover:bg-purple-600/30">Early Access</a>
       </div>
     </div>
-  </div>
+  </nav>
 </header>
 
-<!-- HOW TO EARN -->
+<!-- Spacer so header doesn't overlap content -->
+<div class="h-20"></div>
+
+<!-- Hero -->
+<section id="top" class="max-w-6xl mx-auto px-4 py-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+    <!-- Left content -->
+    <div class="space-y-4">
+      <h1 class="text-4xl md:text-5xl font-bold neon-text">Zep Swipe — Campus Wallet for Students</h1>
+      <p class="text-gray-300 max-w-xl">Earn <span class="neon-text">$ZAC</span> by taking quick quizzes, sync to your mobile wallet, and spend at campus vendors — simple, social, and student-first.</p>
+
+      <div class="flex flex-wrap gap-3 mt-4">
+        <button id="connectHero" class="px-5 py-3 rounded-lg cta-main font-semibold float-card">Connect Wallet</button>
+        <a href="https://forms.gle/7Pr7gLySfroWMptC9" target="_blank" class="px-5 py-3 rounded-lg border border-white/8 glass float-card">Start Quiz</a>
+        <a href="#wishlist" class="px-4 py-3 rounded-lg bg-yellow-400 text-black font-semibold float-card">Join Early — Get free ZAC</a>
+      </div>
+
+      <!-- quick token ribbon -->
+      <div class="mt-4 token-pill inline-flex gap-2">
+        <span class="text-xs text-gray-300">Powered by</span>
+        <strong>$ZAC</strong>
+        <span class="text-xs text-gray-300">+ USDT</span>
+      </div>
+    </div>
+
+    <!-- Right: hero image (lighter photo + robust fallback) -->
+    <div class="rounded-xl overflow-hidden shadow-lg">
+      <img
+        alt="African students studying on campus"
+        class="w-full h-72 md:h-96 object-cover"
+        src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=70"
+        onerror="this.onerror=null;this.style.objectFit='cover';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22500%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%232a1f45%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2232%22 fill=%22%23dbeeff%22 font-family=%22Arial,Helvetica,sans-serif%22>Student imagery unavailable</text></svg>';"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- How students earn (simplified) -->
 <section id="earn-steps" class="py-12 px-4">
-  <div class="max-w-6xl mx-auto text-center">
-    <h2 class="text-3xl font-bold neon-text mb-4">How students earn</h2>
-    <p class="text-gray-300 mb-8">Simple flow — quiz, reward, wallet, spend.</p>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="glass p-5 rounded-xl float-y">
-        <div class="text-xl font-semibold mb-2">1. Quiz</div>
-        <div class="text-sm text-gray-300">Take micro-quizzes (2 minutes)</div>
-      </div>
-      <div class="glass p-5 rounded-xl float-y">
-        <div class="text-xl font-semibold mb-2">2. Reward</div>
-        <div class="text-sm text-gray-300">Earn instant $ZAC tokens</div>
-      </div>
-      <div class="glass p-5 rounded-xl float-y">
-        <div class="text-xl font-semibold mb-2">3. Wallet</div>
-        <div class="text-sm text-gray-300">Tokens delivered to your mobile wallet</div>
-      </div>
-      <div class="glass p-5 rounded-xl float-y">
-        <div class="text-xl font-semibold mb-2">4. Vendor</div>
-        <div class="text-sm text-gray-300">Spend at campus cafés & shops</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- STUDENT STORIES -->
-<section id="testimonials" class="py-12 px-4">
   <div class="max-w-5xl mx-auto text-center">
-    <h2 class="text-3xl font-bold neon-text mb-6">Student Stories</h2>
+    <h2 class="text-3xl font-bold neon-text mb-4">How students earn</h2>
+    <p class="text-gray-300 mb-6">Fast flow — Quiz → Reward → Wallet → Vendor</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+      <div class="glass p-4 rounded-lg float-card">
+        <div class="text-xl font-semibold mb-2">1. Quiz</div>
+        <div class="text-sm text-gray-300">Short micro-quiz you can do between classes.</div>
+      </div>
+      <div class="glass p-4 rounded-lg float-card">
+        <div class="text-xl font-semibold mb-2">2. Reward</div>
+        <div class="text-sm text-gray-300">Earn $ZAC instantly for participation.</div>
+      </div>
+      <div class="glass p-4 rounded-lg float-card">
+        <div class="text-xl font-semibold mb-2">3. Wallet</div>
+        <div class="text-sm text-gray-300">Rewards sync to your mobile or web wallet.</div>
+      </div>
+      <div class="glass p-4 rounded-lg float-card">
+        <div class="text-xl font-semibold mb-2">4. Vendor</div>
+        <div class="text-sm text-gray-300">Spend at cafés, stores, or convert to USDT.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials with safe image fallbacks -->
+<section class="py-12 px-4">
+  <div class="max-w-5xl mx-auto">
+    <h3 class="text-2xl font-bold neon-text text-center mb-6">Student Stories</h3>
     <div class="grid md:grid-cols-3 gap-4">
-      <div class="glass p-5 rounded-xl float-y">
-        <img src="https://picsum.photos/seed/stu1/200/200" alt="student 1" class="w-20 h-20 rounded-full mx-auto object-cover mb-4">
-        <p class="text-sm text-gray-300 italic">"Zep Swipe makes campus life easy — quick rewards for learning."</p>
-        <div class="text-pink-300 mt-3 font-semibold">— Ama, Ghana</div>
+      <div class="glass p-4 rounded-lg float-card text-center">
+        <img alt="Student Ama" class="w-20 h-20 mx-auto rounded-full object-cover mb-3" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=60" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%232a1f45%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2214%22 fill=%22%23dbeeff%22>Ama</text></svg>';">
+        <p class="text-gray-300 italic">“Quizzes gave me ZAC for printing and coffee.”</p>
+        <div class="mt-2 font-semibold text-pink-300">— Ama, Ghana</div>
       </div>
-      <div class="glass p-5 rounded-xl float-y">
-        <img src="https://picsum.photos/seed/stu2/200/200" alt="student 2" class="w-20 h-20 rounded-full mx-auto object-cover mb-4">
-        <p class="text-sm text-gray-300 italic">"Connected on mobile in seconds. Redeemed ZAC for lunch."</p>
-        <div class="text-pink-300 mt-3 font-semibold">— Sanele, RSA</div>
+
+      <div class="glass p-4 rounded-lg float-card text-center">
+        <img alt="Student Sanele" class="w-20 h-20 mx-auto rounded-full object-cover mb-3" src="https://images.unsplash.com/photo-1531123414780-fdb0c2f6f0b7?auto=format&fit=crop&w=400&q=60" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%232a1f45%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2214%22 fill=%22%23dbeeff%22>Sanele</text></svg>';">
+        <p class="text-gray-300 italic">“Instant rewards into my wallet — super handy.”</p>
+        <div class="mt-2 font-semibold text-pink-300">— Sanele, South Africa</div>
       </div>
-      <div class="glass p-5 rounded-xl float-y">
-        <img src="https://picsum.photos/seed/stu3/200/200" alt="student 3" class="w-20 h-20 rounded-full mx-auto object-cover mb-4">
-        <p class="text-sm text-gray-300 italic">"Micro-quizzes are fun and actually pay out — love it."</p>
-        <div class="text-pink-300 mt-3 font-semibold">— Kofi, Ghana</div>
+
+      <div class="glass p-4 rounded-lg float-card text-center">
+        <img alt="Student Kofi" class="w-20 h-20 mx-auto rounded-full object-cover mb-3" src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=400&q=60" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%232a1f45%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2214%22 fill=%22%23dbeeff%22>Kofi</text></svg>';">
+        <p class="text-gray-300 italic">“Paid for lunch on campus with ZAC — love it.”</p>
+        <div class="mt-2 font-semibold text-pink-300">— Kofi, Ghana</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WISHLIST / EARLY ACCESS -->
+<!-- Wishlist / Early Access -->
 <section id="wishlist" class="py-12 px-4">
-  <div class="max-w-3xl mx-auto">
-    <div class="glass p-6 rounded-xl text-center">
-      <h3 class="text-2xl font-bold neon-text mb-2">Join Early Access — Get Free ZAC</h3>
-      <p class="text-gray-300 mb-4">Sign up early and receive an introductory $ZAC credit when we launch campus pilots.</p>
+  <div class="max-w-3xl mx-auto glass p-6 rounded-lg text-center">
+    <h3 class="text-2xl font-bold neon-text mb-2">Join Early Access — Get Free ZAC</h3>
+    <p class="text-gray-300 mb-4">Sign up and get credited when we launch campus pilots.</p>
 
-      <form action="https://docs.google.com/forms/d/e/1FAIpQLSfBjWItPmUzfEDcz4FrOS8-9vnuLC31q6cfxQKihW-FmhCO_Q/viewform?usp=send_form" target="_blank" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <input type="text" placeholder="Full name" required class="p-3 rounded-lg bg-[#0a0a0a] text-white border border-gray-600 focus:outline-none">
-        <input type="email" placeholder="Email address" required class="p-3 rounded-lg bg-[#0a0a0a] text-white border border-gray-600 focus:outline-none">
-        <button type="submit" class="px-4 py-3 gradient-btn text-black rounded-lg font-semibold">Sign Up & Get ZAC</button>
-      </form>
-    </div>
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSfBjWItPmUzfEDcz4FrOS8-9vnuLC31q6cfxQKihW-FmhCO_Q/viewform?usp=send_form" target="_blank" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <input type="text" name="name" required placeholder="Your name" class="p-3 rounded-lg bg-[#0a0a0a] text-white border border-gray-600 focus:outline-none">
+      <input type="email" name="email" required placeholder="Email address" class="p-3 rounded-lg bg-[#0a0a0a] text-white border border-gray-600 focus:outline-none">
+      <button type="submit" class="p-3 rounded-lg cta-main font-semibold">Sign up & get ZAC</button>
+    </form>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- Footer -->
 <footer class="py-8 text-center text-gray-300 text-sm border-t border-white/6">
-  © 2025 Zep Swipe — Built for Africa’s Students. Powered by $ZAC + USDT.
+  © 2025 Zep Swipe — Made for Africa’s Students • Powered by $ZAC + USDT
 </footer>
 
-<!-- CONNECT WALLET MODAL -->
-<div id="walletModal" class="fixed inset-0 hidden items-end sm:items-center justify-center z-60">
-  <div id="modalBackdrop" class="absolute inset-0 modal-backdrop"></div>
-  <div class="modal w-full sm:w-[420px] glass rounded-t-xl sm:rounded-xl p-4">
-    <div class="flex items-start justify-between">
-      <div>
-        <h4 class="font-bold text-lg neon-text">Connect Wallet</h4>
-        <div class="text-xs text-gray-300">Mobile-first options included</div>
-      </div>
-      <button id="closeModal" class="text-gray-300">✕</button>
-    </div>
-
-    <div class="mt-4 grid gap-3">
-      <a href="#" class="p-3 rounded-lg gradient-btn text-black text-center font-semibold">Open Mobile Wallet App</a>
-      <a href="#" class="p-3 rounded-lg glass text-center border border-white/6">Connect via WalletConnect</a>
-      <button id="showQR" class="p-3 rounded-lg border border-white/6">Show QR Code</button>
-    </div>
-
-    <div id="qrArea" class="mt-4 hidden text-center">
-      <div class="inline-block p-4 glass rounded-lg">
-        <img src="https://picsum.photos/seed/qr/200/200" alt="QR placeholder" class="w-40 h-40 object-cover rounded-sm mx-auto">
-        <div class="text-xs text-gray-300 mt-2">Scan with your wallet app</div>
-      </div>
-    </div>
-
-    <div class="mt-4 text-xs text-gray-400">
-      Tip: On mobile, tap "Open Mobile Wallet App" to deep-link. On desktop, use WalletConnect.
-    </div>
-  </div>
-</div>
-
-<!-- SCRIPTS: particles + modal + simple UI -->
+<!-- Tiny JS: particles + menu + modal placeholder -->
 <script>
-/* Particles (lightweight) */
-const canvas = document.getElementById('particle-canvas'), ctx = canvas.getContext('2d');
-let w, h, parts = [];
-function resize(){ w = canvas.width = innerWidth; h = canvas.height = innerHeight; canvas.style.width = innerWidth+'px'; canvas.style.height = innerHeight+'px'; init(); }
-function rand(a,b){ return Math.random()*(b-a)+a; }
-function init(){
-  parts = []; const count = Math.min(100, Math.round(innerWidth/12));
+/* ---------- particles (lightweight) ---------- */
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [], W=innerWidth, H=innerHeight;
+
+function resize(){ W = canvas.width = innerWidth; H = canvas.height = innerHeight; canvas.style.width = innerWidth+'px'; canvas.style.height = innerHeight+'px'; }
+window.addEventListener('resize', resize); resize();
+
+function initParts(){
+  particles = [];
+  const count = Math.min(90, Math.round(innerWidth/12));
   for(let i=0;i<count;i++){
-    parts.push({ x:rand(0,w), y:rand(0,h), r:rand(0.8,3.2), vx:rand(-0.25,0.25), vy:rand(-0.15,0.15), hue:rand(190,320), a:rand(0.06,0.28) });
+    particles.push({
+      x: Math.random()*W,
+      y: Math.random()*H,
+      r: Math.random()*2 + 0.7,
+      vx: (Math.random()-0.5)*0.25,
+      vy: (Math.random()-0.5)*0.25,
+      a: Math.random()*0.25 + 0.05,
+      hue: Math.random()*120 + 180
+    });
   }
 }
-function draw(){
-  ctx.clearRect(0,0,w,h);
-  for(const p of parts){
+initParts();
+
+function step(){
+  ctx.clearRect(0,0,W,H);
+  for(const p of particles){
     p.x += p.vx; p.y += p.vy;
-    if(p.x < -50) p.x = w+10; if(p.x > w+50) p.x = -10;
-    if(p.y < -50) p.y = h+10; if(p.y > h+50) p.y = -10;
-    const g = ctx.createRadialGradient(p.x,p.y,p.r/2,p.x,p.y,p.r*6);
-    g.addColorStop(0, `hsla(${p.hue},85%,68%,${p.a})`);
-    g.addColorStop(0.3, `hsla(${p.hue},85%,68%,${p.a*0.55})`);
+    if(p.x < -50) p.x = W+10;
+    if(p.x > W+50) p.x = -10;
+    if(p.y < -50) p.y = H+10;
+    if(p.y > H+50) p.y = -10;
+
+    // glow
+    const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r*8);
+    g.addColorStop(0, `hsla(${p.hue},80%,60%,${p.a})`);
+    g.addColorStop(0.4, `hsla(${p.hue},80%,60%,${p.a*0.45})`);
     g.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = g;
     ctx.beginPath(); ctx.arc(p.x,p.y,p.r*6,0,Math.PI*2); ctx.fill();
-    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle = `hsla(${p.hue},85%,78%,${p.a+0.12})`; ctx.fill();
+
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle = `hsla(${p.hue},80%,70%,${Math.min(1,p.a+0.12)})`;
+    ctx.fill();
   }
-  requestAnimationFrame(draw);
+  requestAnimationFrame(step);
 }
-window.addEventListener('resize', resize);
-resize(); draw();
+step();
 
-/* Modal logic */
-const connectBtns = document.querySelectorAll('#connectBtn, #connectBtnHero, #mobileBtn');
-const modal = document.getElementById('walletModal');
-const closeBtn = document.getElementById('closeModal');
-const backdrop = document.getElementById('modalBackdrop');
-const showQR = document.getElementById('showQR');
-const qrArea = document.getElementById('qrArea');
+/* ---------- header menu toggle ---------- */
+const menuBtn = document.getElementById('menuBtn');
+const menuDrop = document.getElementById('menuDrop');
+menuBtn.addEventListener('click', ()=> menuDrop.classList.toggle('hidden'));
 
-connectBtns.forEach(b => b && b.addEventListener('click', (e)=>{ e.preventDefault(); openModal(); }));
-function openModal(){ modal.classList.remove('hidden'); modal.style.display='flex'; }
-function closeModal(){ modal.classList.add('hidden'); modal.style.display='none'; qrArea.classList.add('hidden'); }
-closeBtn.addEventListener('click', closeModal);
-backdrop.addEventListener('click', closeModal);
-showQR.addEventListener('click', ()=> qrArea.classList.toggle('hidden'));
+/* ---------- Connect Wallet placeholders: header & hero ---------- */
+const connectHeader = document.getElementById('connectHeader');
+const connectHero = document.getElementById('connectHero');
 
-/* Wishlist form: basic success UI handled by google form target (no JS needed) */
+function openWalletMock(){
+  // placeholder UX: you should integrate WalletConnect / Web3Modal on production
+  alert('Connect Wallet (mock). For production connect, integrate WalletConnect or your chosen SDK.');
+}
+connectHeader.addEventListener('click', openWalletMock);
+connectHero.addEventListener('click', openWalletMock);
 
-/* Accessibility: disable particles on reduced motion */
-if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ parts = []; }
+/* ---------- improve accessibility: close menu on outside click ---------- */
+document.addEventListener('click', (e)=>{
+  if(!menuBtn.contains(e.target) && !menuDrop.contains(e.target)) menuDrop.classList.add('hidden');
+});
+
+/* ---------- prefers-reduced-motion support ---------- */
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  // stop particle animation
+  particles = [];
+  cancelAnimationFrame(step);
+}
 </script>
-
 </body>
 </html>
