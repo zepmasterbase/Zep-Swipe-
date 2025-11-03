@@ -53,19 +53,17 @@
       padding: 0.4rem 1rem;
       border-radius: 9999px;
       border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ff00ff;
+      background: rgba(255, 255, 255, 0.05);
       font-weight: 600;
       font-size: 0.9rem;
-      color: #ff00ff;
-      background: rgba(0, 0, 0, 0.2);
-      text-shadow: 0 0 10px rgba(255, 0, 240, 0.8);
-      box-shadow: 0 0 10px rgba(255, 0, 240, 0.6);
-      pointer-events: none; /* disabled */
-      opacity: 1; /* neon visible */
       transition: 0.3s;
     }
     .login-btn:hover {
-      transform: none; /* no hover effect */
-      box-shadow: 0 0 15px rgba(255, 0, 240, 1);
+      background: linear-gradient(90deg, #ff00ff, #00ffff);
+      color: #0b0520;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 0, 240, 0.6);
     }
 
     /* Hero */
@@ -174,7 +172,7 @@
   <!-- HEADER -->
   <header>
     <div class="logo">ZEP SWIPE</div>
-    <span class="login-btn">LOGIN</span>
+    <a href="login.html" class="login-btn">LOGIN</a>
   </header>
 
   <!-- HERO -->
@@ -196,10 +194,9 @@
   <!-- FOOTER -->
   <footer>
     <div>
-      <a href="https://t.me/zepswipe" target="_blank"><i class="fab fa-telegram fa-lg"></i></a>
-      <a href="https://www.instagram.com/zepswipe?igsh=bXF3anMxODhxZWFs" target="_blank"><i class="fab fa-instagram fa-lg"></i></a>
       <a href="https://x.com/ZepSwipe?t=r94a0_pgN7ew1xT5L4eOSA&s=09" target="_blank"><i class="fab fa-x-twitter fa-lg"></i></a>
-      <a href="https://x.com/ZepSwipe?t=r94a0_pgN7ew1xT5L4eOSA&s=09" target="_blank"><i class="fab fa-facebook fa-lg"></i></a>
+      <a href="https://www.instagram.com/zepswipe?igsh=bXF3anMxODhxZWFs" target="_blank"><i class="fab fa-instagram fa-lg"></i></a>
+      <a href="https://facebook.com/ZepSwipe" target="_blank"><i class="fab fa-facebook fa-lg"></i></a>
     </div>
     <p class="text-sm mt-2 opacity-70">© 2025 Zep Swipe. All rights reserved.</p>
   </footer>
